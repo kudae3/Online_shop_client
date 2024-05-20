@@ -1,15 +1,26 @@
 <template>
     <div>
-        <h1 class="font-semibold text-cyan-500">Home Page</h1>
+        <h1 class="font-semibold text-cyan-500">Home Page - Username : {{ userData.name }}</h1>
         <Count></Count>
     </div>
 </template>
 
 <script>
+    import { computed } from 'vue';
     import Count from '../components/Count.vue'
-export default {
-  components: { Count },
+    import store from '../store';
+    export default {
         
+        components: { Count },
+        
+        setup(){
+            
+            let userData = computed(()=>store.getters.storageUser)
+
+            return {userData}
+        }
+        
+    
     }
 </script>
 

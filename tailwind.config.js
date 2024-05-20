@@ -6,6 +6,11 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'dancing-srcipt': ["Dancing Script", "cursive"],
+      'caveat': ["Caveat", "cursive"],
+      'comfortaa': ["Comfortaa", "sans-serif"]
+    }
   },
   plugins: [],
 }
