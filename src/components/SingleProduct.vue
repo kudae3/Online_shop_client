@@ -11,7 +11,7 @@
       />
       
       <div class="absolute top-1 left-2">
-        <button class="text-white hover:text-pink-600">
+        <button class="text-red-400 hover:text-red-900">
           <i class="fa-regular fa-heart"></i>
         </button>
       </div>
@@ -19,6 +19,7 @@
     </div>
     <p class="font-medium text-slate-500 text-sm">{{ product.name }}</p>
     <p class="font-medium text-sm text-slate-700">$ {{ product.price }}</p>
+  
   </div>
 
 </template>

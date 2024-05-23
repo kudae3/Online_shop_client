@@ -9,8 +9,8 @@
             <div class="sm:flex justify-between items-center space-y-7 sm:space-y-0">
             
                 <div>
-                    <form>
-                        <input class=" font-medium border-gray-400 border-b-[1px] outline-none py-1 px-2" type="text" placeholder="Search">
+                    <form @submit.prevent="Search()">
+                        <input v-model="key" class="font-medium border-gray-400 border-b-[1px] outline-none py-1 px-2" type="text" placeholder="Search">
                     </form>
                 </div>
                 
@@ -45,6 +45,7 @@ export default {
 
         let products = ref('')
         let categories = ref('')
+        let key = ref('')
 
         let getProducts = () =>{
             axios.get('http://127.0.0.1:8000/api/get/products')
@@ -83,12 +84,28 @@ export default {
         
         }
 
+        let Search = () =>{
+
+            axios.get('http://127.0.0.1:8000/api/search/product',{
+                params: {
+                    search: key.value
+                }
+            })
+            .then(res => {
+                products.value = res.data.products
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+            
+        }
+
         onMounted(()=>{
             getProducts()
             getCategories()
         })
 
-        return {products, categories, Filter}
+        return {products, categories, Filter, Search, key}
         
     }
 }
