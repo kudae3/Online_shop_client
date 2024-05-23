@@ -4,11 +4,13 @@
     
     <div class="relative">
       
-      <img
-        class="rounded-md cursor-pointer hover:scale-105 duration-300"
-        :src="photo"
-        alt=""
-      />
+      <router-link :to="{name: 'detail', params: {id: product.id}}">
+          <img
+          class="rounded-md cursor-pointer hover:scale-105 duration-300"
+          :src="photo"
+          alt=""
+        />
+      </router-link>
       
       <div class="absolute top-1 left-2">
         <button class="text-red-400 hover:text-red-900">

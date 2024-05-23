@@ -4,7 +4,9 @@
         
         <!-- Logo -->
         <div class="flex space-x-7">
-            <h2 class="font-dancing-srcipt text-4xl font-semibold text-white"><a href="./index.html">Shauzk</a></h2>
+            <router-link :to="{name: 'home'}">
+                <h2 class="font-dancing-srcipt text-4xl font-semibold text-white">Shauzk</h2>
+            </router-link>
         </div>
         
         <!-- Nav items -->
