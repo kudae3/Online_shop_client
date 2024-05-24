@@ -33,8 +33,8 @@
                 <button @click="addCart()" class="bg-green-500 text-slate-50 font-semibold px-3 py-2 rounded-2xl hover:bg-green-700 shadow-lg duration-300 w-full">
                     Add to Cart
                     <i class="fa-solid fa-cart-plus ps-2"></i>
-                </button>
-                
+                </button>          
+
             </div>
 
         </div>        
@@ -47,6 +47,7 @@ import { onMounted } from 'vue';
 import axios from 'axios'
 import { ref } from 'vue';
 import Navigation from '../components/Navigation.vue'
+import useUser from '../composables/useUser.js';
 export default {
   
     components: { Navigation },
@@ -59,7 +60,10 @@ export default {
         let photo = ref('')
         let count = ref('1')
 
+        let {userData, getUserData} = useUser()
+
         let getProduct = () => {
+            
             axios.get('http://127.0.0.1:8000/api/detail/product',{
                 params: {
                     id: props.id
@@ -75,11 +79,15 @@ export default {
         }
 
         let addCart = () => {
-            console.log(count.value);
+            console.log('User_id: ', userData.id);
+            console.log('Product_id:', product.value.id);
+            console.log('Count :', count.value );
+            console.log('Price:', product.value.price);
         }
 
         onMounted( ()=>{
             getProduct()
+            getUserData()
         } )
 
         return {product, photo, count, addCart}

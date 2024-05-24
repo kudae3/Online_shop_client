@@ -79,6 +79,9 @@ export default {
             axios.post('http://127.0.0.1:8000/api/register', inputData)
             
             .then(result => {
+
+                localStorage.setItem('userToken', result.data.token);
+
                 store.dispatch('setToken', result.data.token)
                 store.dispatch('setUser', result.data.user)
                 router.push({name: 'home'})

@@ -57,6 +57,8 @@ export default {
             
             .then((result) => {
                
+                localStorage.setItem('userToken', result.data.token);
+                
                 store.dispatch('setToken', result.data.token);
                 store.dispatch('setUser', result.data.user)
                 router.push({name: 'home'})
