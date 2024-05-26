@@ -13,9 +13,9 @@ let userData = reactive({
 
 let token = localStorage.getItem('userToken');
 
-let getUserData = () => {
+let getUserData = async() => {
     
-    axios.get('http://127.0.0.1:8000/api/get/user', {
+    await axios.get('http://127.0.0.1:8000/api/get/user', {
         headers: {
             Authorization: `Bearer ${token}`
         }
