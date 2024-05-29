@@ -4,13 +4,104 @@ import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
 import Detail from '../views/Detail.vue'
 import Cart from '../views/Cart.vue'
+import Order from '../views/Order.vue'
 
 const routes = [
-    {path: '/', alias: '/login', name: 'login', component: Login},
-    {path: '/register', name: 'register', component: Register},
-    {path: '/home', name: 'home', component: Home},
-    {path: '/home/detail/:id', name: 'detail', component: Detail, props: true},
-    {path: '/cart', name: 'cart', component: Cart}
+    
+    {
+        path: '/',
+        alias: '/login',
+        name: 'login', 
+        component: Login,
+        beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+
+            if(!token){
+                next()
+            }
+            else{
+                next({name: 'home'})
+            }
+
+        }
+    },
+       
+    {
+        path: '/register', 
+        name: 'register', 
+        component: Register,         
+        beforeEnter: (to, from, next) => {
+        
+            let token = localStorage.getItem('userToken') 
+            if(!token){
+                next()
+            }
+            else{
+                next({name: 'home'})
+            }
+        }
+    },
+    
+    {
+        path: '/home', 
+        name: 'home', 
+        component: Home,
+        beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+            if(token){
+                next()
+            }
+            else{
+                next({name: 'login'})
+            }
+        }
+    },
+    
+    {
+        path: '/home/detail/:id', 
+        name: 'detail', 
+        component: Detail, 
+        props: true,
+        beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+            if(token){
+                next()
+            }
+            else{
+                next({name: 'login'})
+            }
+        }
+    },
+    
+    {
+        path: '/cart', 
+        name: 'cart', 
+        component: Cart,
+        beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+            if(token){
+                next()
+            }
+            else{
+                next({name: 'login'})
+            }
+        }
+    },
+    
+    {
+        path: '/order', 
+        name: 'order', 
+        component: Order,
+                beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+            if(token){
+                next()
+            }
+            else{
+                next({name: 'login'})
+            }
+        }
+    }
 ]
 
 const router = createRouter({

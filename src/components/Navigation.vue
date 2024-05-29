@@ -20,7 +20,7 @@
             
             <div class=" flex flex-col space-y-8 justify-center items-center text-3xl md:flex-row md:space-y-0 md:space-x-7 md:text-xl">
                 <router-link :to="{name: 'cart'}" class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-cart-shopping"></i></router-link>
-                <router-link class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-truck"></i></router-link>
+                <router-link :to="{name: 'order'}" class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-truck"></i></router-link>
             </div>
         
         </div>
