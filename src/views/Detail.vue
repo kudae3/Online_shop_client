@@ -21,7 +21,7 @@
         </div>
 
         <!-- Product detail -->
-        <div class="m-10 md:mx-20 lg:mx-40 sm:flex justify-center space-y-5 sm:space-y-0 sm:space-x-5">
+        <div v-if="product" class="m-10 md:mx-20 lg:mx-40 sm:flex justify-center space-y-5 sm:space-y-0 sm:space-x-5">
             
             <div>
                 <img class="rounded-md shadow-md" :src="photo" alt="">
@@ -68,12 +68,17 @@
 
             </div>
 
+        </div>
+
+        <div v-else>
+            <Spinner></Spinner>
         </div>        
 
     </div>
 </template>
 
 <script>
+import Spinner from '../components/Spinner.vue'
 import { onMounted } from 'vue';
 import axios from 'axios'
 import { ref } from 'vue';
@@ -81,7 +86,8 @@ import Navigation from '../components/Navigation.vue'
 import useUser from '../composables/useUser.js';
 export default {
   
-    components: { Navigation },
+    components: {
+    Spinner, Navigation },
     
     props: ['id'],
   

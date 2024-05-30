@@ -32,7 +32,8 @@
             <div class="flex space-x-3 md:text-xl">
                 <button class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-moon"></i></button>
                 <!-- <button class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-lightbulb"></i></button> -->
-                <button class="px-2 py-1 hover:text-orange-700 duration-200 text-orange-800"><i class="fa-solid fa-user"></i></button>
+                <button class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-user"></i></button>
+                <button @click="Logout()" class="px-2 py-1 hover:text-red-700 duration-200 text-red-600"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
 
             <!-- Mobile menu -->
@@ -46,16 +47,23 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
     setup () {
         const mobileSlide = ref("-100%");
+        let router = useRouter();
 
         let toggleMobileMenu = () => {
             mobileSlide.value = mobileSlide.value === "0px" ? "-100%" : "0px";
         }
 
-        return { mobileSlide, toggleMobileMenu };
+        let Logout = () => {
+            localStorage.removeItem('userToken');
+            router.push({name: 'login'});
+        }
+
+        return { mobileSlide, toggleMobileMenu, Logout };
     }
 }
 </script>

@@ -24,7 +24,12 @@
 
             <!-- Cart -->
             <div class="relative overflow-x-auto h-fit shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                
+                <div v-if="errMsg" class="flex justify-center items-center">
+                    <h2 class="text-red-400 font-medium text-lg py-7">No items in the Cart</h2>
+                </div>
+
+                <table v-else-if="carts.length" class="w-full text-sm text-left rtl:text-right text-gray-500 ">
 
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                         <tr>
@@ -57,9 +62,10 @@
 
                 </table>
 
-                <div v-if="carts.length == 0" class="flex justify-center items-center">
-                        <h2 class="text-red-400 font-medium text-lg py-7">No items in the Cart</h2>
+                <div v-else>
+                    <Spinner></Spinner>
                 </div>
+
 
             </div>
 
@@ -115,6 +121,7 @@
 
 <script>
 
+import Spinner from '../components/Spinner.vue'
 import Singlecart from '../components/Singlecart.vue'
 import { onMounted, ref} from 'vue';
 import axios from 'axios'
@@ -125,6 +132,7 @@ import moment from 'moment'
 
 export default {
   components: {
+    Spinner,
     Singlecart,
     Navigation },
     
@@ -138,6 +146,7 @@ export default {
         let loading = ref(false)
         let orderText = ref('Proceed to Checkout')
         let isProceeding = ref(false)
+        let errMsg = ref(false)
 
         onMounted(async()=>{
             await getUserData()
@@ -145,12 +154,20 @@ export default {
         })
 
         let getCart = async() => {
+
+            errMsg.value = false
+            
             await axios.get('http://127.0.0.1:8000/api/view/cart', {params: {
                 user_id : userData.id
             }})
             .then(res => {
-                carts.value = res.data.cart
-                subtotal.value = carts.value.reduce((acc, cart) => acc + (cart.quantity * cart.price), 0);
+                if(res.data.cart.length){
+                    carts.value = res.data.cart
+                    subtotal.value = carts.value.reduce((acc, cart) => acc + (cart.quantity * cart.price), 0);
+                }
+                else{
+                    errMsg.value = true
+                }
             })
             .catch(err => {
                 console.error(err); 
@@ -183,7 +200,7 @@ export default {
         } 
 
 
-        return {carts, moment, subtotal, Order, loading, orderSuccess, orderText, isProceeding}
+        return {carts, moment, subtotal, Order, loading, orderSuccess, orderText, isProceeding, errMsg}
     }
 
 }

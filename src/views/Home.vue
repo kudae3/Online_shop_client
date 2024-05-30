@@ -1,7 +1,9 @@
 <template>
     <div>
         
-        <Navigation></Navigation>    
+        <Navigation></Navigation>  
+
+
 
         <div class="mx-10 my-7 md:mx-20 lg:mx-32 space-y-10">
             
@@ -23,7 +25,15 @@
 
             </div>
 
-            <Allproducts :products="products"></Allproducts>
+            <div v-if="errorMsg" class="flex justify-center items-center">
+                <p class="font-medium text-lg text-red-500">No Product Found !</p>
+            </div>
+
+            <Allproducts v-else-if="products.length" :products="products"></Allproducts>
+
+            <div v-else>
+                <Spinner></Spinner>
+            </div>
         
         </div>
   
@@ -32,6 +42,7 @@
 </template>
 
 <script>
+import Spinner from '../components/Spinner.vue'
 import Allproducts from '../components/Allproducts.vue'
 import axios from 'axios'
 import Navigation from '../components/Navigation.vue'
@@ -39,6 +50,7 @@ import { onMounted, ref } from 'vue';
 export default {
   
     components: {
+    Spinner,
     Allproducts, Navigation },
     
     setup () {
@@ -46,6 +58,7 @@ export default {
         let products = ref('')
         let categories = ref('')
         let key = ref('')
+        let errorMsg = ref(false);
 
         let getProducts = () =>{
             axios.get('http://127.0.0.1:8000/api/get/products')
@@ -69,6 +82,8 @@ export default {
 
         let Filter = (id) => {
 
+            errorMsg.value = false
+
             axios.get('http://127.0.0.1:8000/api/filter/category', {
                 params: {
                     id
@@ -76,7 +91,12 @@ export default {
             })
             
             .then(res => {
-                products.value = res.data.products
+                if(res.data.products.length){
+                    products.value = res.data.products
+                }
+                else{
+                    errorMsg.value = true
+                }
             })
             .catch(err => {
                 console.error(err); 
@@ -86,13 +106,20 @@ export default {
 
         let Search = () =>{
 
+            errorMsg.value = false
+
             axios.get('http://127.0.0.1:8000/api/search/product',{
                 params: {
                     search: key.value
                 }
             })
             .then(res => {
-                products.value = res.data.products
+                if(res.data.products.length){
+                    products.value = res.data.products
+                }
+                else{
+                    errorMsg.value = true
+                }
             })
             .catch(err => {
                 console.error(err); 
@@ -105,7 +132,7 @@ export default {
             getCategories()
         })
 
-        return {products, categories, Filter, Search, key}
+        return {products, categories,errorMsg, Filter, Search, key}
         
     }
 }
