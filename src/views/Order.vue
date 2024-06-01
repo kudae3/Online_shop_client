@@ -4,7 +4,7 @@
         <Navigation></Navigation>
 
         <div class="mx-10 my-10 md:mx-20 lg:mx-32">
-            <div class="relative overflow-x-auto h-fit shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto h-fit  sm:rounded-lg">
 
                 <div v-if="errMsg" class="flex justify-center items-center">
                     <h2 class="text-red-400 font-medium text-lg py-7">No order yet! 😓</h2>

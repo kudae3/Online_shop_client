@@ -8,7 +8,8 @@ let userData = reactive({
     role: '',
     phone: '',
     address: '',
-    password: ''
+    password: '',
+    photo: ''
 })
 
 let token = localStorage.getItem('userToken');
@@ -29,6 +30,7 @@ let getUserData = async() => {
        userData.phone = res.data.user.phone 
        userData.address = res.data.user.address 
        userData.password = res.data.user.password 
+       userData.photo = "http://127.0.0.1:8000/storage/"+ res.data.user.photo
     })
 
     .catch(err => {

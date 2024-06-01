@@ -23,7 +23,7 @@
         <div class="mx-10 my-10 md:mx-20 lg:mx-32 lg:flex justify-center space-y-5 lg:space-y-0 lg:space-x-7">
 
             <!-- Cart -->
-            <div class="relative overflow-x-auto h-fit shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto h-fit sm:rounded-lg">
                 
                 <div v-if="errMsg" class="flex justify-center items-center">
                     <h2 class="text-red-400 font-medium text-lg py-7">No items in the Cart</h2>

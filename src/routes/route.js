@@ -5,6 +5,9 @@ import Home from '../views/Home.vue'
 import Detail from '../views/Detail.vue'
 import Cart from '../views/Cart.vue'
 import Order from '../views/Order.vue'
+import AccCenter from '../views/AccCenter.vue'
+import AccDetail from '../views/AccDetail.vue'
+import AccEdit from '../views/AccEdit.vue'
 
 const routes = [
     
@@ -92,7 +95,52 @@ const routes = [
         path: '/order', 
         name: 'order', 
         component: Order,
-                beforeEnter: (to, from, next) => {
+        beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+            if(token){
+                next()
+            }
+            else{
+                next({name: 'login'})
+            }
+        }
+    }, 
+
+    {
+        path : '/account/center',
+        name: 'accCenter',
+        component: AccCenter,
+        beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+            if(token){
+                next()
+            }
+            else{
+                next({name: 'login'})
+            }
+        }
+    },
+
+    {
+        path : '/account/detail',
+        name: 'accDetail',
+        component: AccDetail,
+        beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+            if(token){
+                next()
+            }
+            else{
+                next({name: 'login'})
+            }
+        }
+    },
+
+    {
+        path : '/account/edit',
+        name: 'accEdit',
+        component: AccEdit,
+        beforeEnter: (to, from, next) => {
             let token = localStorage.getItem('userToken') 
             if(token){
                 next()

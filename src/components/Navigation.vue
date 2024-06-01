@@ -32,7 +32,7 @@
             <div class="flex space-x-3 md:text-xl">
                 <button class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-moon"></i></button>
                 <!-- <button class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-lightbulb"></i></button> -->
-                <button class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-user"></i></button>
+                <router-link :to="{name: 'accCenter'}" class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-user"></i></router-link>
                 <button @click="Logout()" class="px-2 py-1 hover:text-red-700 duration-200 text-red-600"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
 
