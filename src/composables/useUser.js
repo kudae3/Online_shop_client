@@ -7,6 +7,7 @@ let userData = reactive({
     email: '',
     role: '',
     phone: '',
+    gender: '',
     address: '',
     password: '',
     photo: ''
@@ -28,13 +29,14 @@ let getUserData = async() => {
        userData.email = res.data.user.email 
        userData.role = res.data.user.role
        userData.phone = res.data.user.phone 
+       userData.gender = res.data.user.gender
        userData.address = res.data.user.address 
        userData.password = res.data.user.password 
        userData.photo = "http://127.0.0.1:8000/storage/"+ res.data.user.photo
     })
 
     .catch(err => {
-        console.error(err.response.data.message); 
+        console.log(err.response.data.message); 
     })
     
 }

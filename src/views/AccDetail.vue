@@ -19,8 +19,8 @@
                     <h1 class="font-medium text-slate-700">Username - {{ userData.name }}</h1>
                     <h1 class="font-medium text-slate-700">Email - {{ userData.email }}</h1>
                     <h1 class="font-medium text-slate-700">Phone - {{ userData.phone}}</h1>
-                    <h1 v-if="userData.gender" class="font-medium text-slate-700">Gender - {{ userData.gender }}</h1>
-                    <h1 v-if="userData.address" class="font-medium text-slate-700">Address - {{ userData.address }}</h1>
+                    <h1 class="font-medium text-slate-700">Gender - {{ userData.gender }}</h1>
+                    <h1 class="font-medium text-slate-700">Address - {{ userData.address }}</h1>
                 </div>
 
                 <button @click="GoEdit()" class=" float-end rounded-xl font-semibold bg-green-600 px-4 py-2 text-slate-50 hover:bg-green-700 duration-300">Edit</button>
