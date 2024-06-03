@@ -18,12 +18,12 @@
 
                 <hr>
 
-                <div class="cursor-pointer">
+                <router-link :to="{name: 'changePass'}" class="cursor-pointer">
                     <div class="flex items-center space-x-1">
                         <div class="size-12 rounded-full flex justify-center items-center"><i class="fa-solid fa-key fa-lg"></i></div>
                         <p class="font-semibold text-gray-600 hover:text-gray-800">Change Password</p>
                     </div>
-                </div>
+                </router-link>
 
             </div>
     

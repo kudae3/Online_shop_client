@@ -36,7 +36,7 @@ let getUserData = async() => {
     })
 
     .catch(err => {
-        console.log(err.response.data.message); 
+        console.log(err.response.data.message); // not for user
     })
     
 }
