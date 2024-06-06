@@ -1,40 +1,40 @@
 <template>
     <div class="mx-10 my-7 lg:my-5  flex justify-center items-center">
         
-        <div class="sm:w-1/2 lg:w-[430px] bg-slate-100 rounded-lg shadow-md p-10 space-y-12 md:space-y-20">
+        <div class="sm:w-1/2 lg:w-[430px] bg-slate-100 dark:bg-slate-800 rounded-lg shadow-md p-10 space-y-12 md:space-y-20">
             
-            <h2 class="font-caveat font-bold text-2xl md:text-3xl text-center text-slate-500" >Welcome to Shauzk!</h2>
+            <h2 class="font-caveat font-bold text-2xl md:text-3xl text-center text-slate-500 dark:text-slate-300" >Welcome to Shauzk!</h2>
                         
             <form action="" class="space-y-7" @submit.prevent="register()">
                 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 block" for="">Username</label>
-                    <input v-model="inputData.name" class="duration-300 border-0 border-b-2 border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="text" name="" id="" >
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Username</label>
+                    <input v-model="inputData.name" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="text" name="" id="" >
                 </div>
                 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 block" for="">Email</label>
-                    <input v-model="inputData.email" class="duration-300 border-0 border-b-2 border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="email" name="" id="" >
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Email</label>
+                    <input v-model="inputData.email" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="email" name="" id="" >
                 </div>
 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 block" for="">Phone</label>
-                    <input v-model="inputData.phone" class="duration-300 border-0 border-b-2 border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="phone" name="" id="" >
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Phone</label>
+                    <input v-model="inputData.phone" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="phone" name="" id="" >
                 </div>  
 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 block" for="">Address</label>
-                    <input v-model="inputData.address" class="duration-300 border-0 border-b-2 border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="address" name="" id="" >
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Address</label>
+                    <input v-model="inputData.address" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="address" name="" id="" >
                 </div>                              
 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 block" for="">Password</label>
-                    <input v-model="inputData.password" class="duration-300 border-0 border-b-2 border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="password" name="" id="" >
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Password</label>
+                    <input v-model="inputData.password" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
                 </div>
 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 block" for="">Confirm Password</label>
-                    <input v-model="inputData.confirmPassword" class="duration-300 border-0 border-b-2 border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="password" name="" id="" >
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Confirm Password</label>
+                    <input v-model="inputData.confirmPassword" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
                 </div>
 
                 <button :disabled="isSigningup" class=" flex justify-center items-center space-x-2 px-3 py-2 text-slate-50 font-semibold bg-orange-400 rounded-md hover:bg-orange-500 duration-700">

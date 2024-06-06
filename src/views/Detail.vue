@@ -3,13 +3,13 @@
         
         <Navigation></Navigation>
             
-        <div v-if="isSuccessfull" class="sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-            <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto">
-                <div class="flex justify-between items-center py-3 px-4 ">
-                    <h3 class="font-bold text-green-500">
+        <div v-if="isSuccessful" class="sm:max-w-lg sm:w-full mx-10 my-20 sm:mx-auto">
+            <div class="flex flex-col bg-slate-100 rounded-xl pointer-events-auto dark:bg-green-700">
+                <div class="flex justify-between items-center py-2 px-4 ">
+                    <h3 class="font-bold text-green-500 dark:text-white">
                         Successfully added to the Cart 🎉
                     </h3>
-                    <button @click="isSuccessfull = false" type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-basic-modal">
+                    <button @click="isSuccessful = false" type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-slate-200 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-basic-modal">
                     <span class="sr-only">Close</span>
                     <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M18 6 6 18"></path>
@@ -21,27 +21,27 @@
         </div>
 
         <!-- Product detail -->
-        <div v-if="product" class="m-10 md:mx-20 lg:mx-40 sm:flex justify-center space-y-5 sm:space-y-0 sm:space-x-5">
+        <div v-if="product" class="my-24 mx-10 md:mx-20 lg:mx-40 sm:flex justify-center space-y-5 sm:space-y-0 sm:space-x-5">
             
             <div>
                 <img class="rounded-md shadow-md" :src="photo" alt="">
             </div>
 
             <div class="space-y-7">
-                <h1 class="text-3xl font-semibold text-slate-500">{{ product.name }}</h1>
-                <h2 class="text-blue-700 text-xl font-semibold">{{ product.price }} $</h2>
-                <h3 class="text-slate-600">{{ product.description }}</h3>
+                <h1 class="text-3xl font-semibold text-slate-500 dark:text-slate-200">{{ product.name }}</h1>
+                <h2 class="text-blue-700 text-2xl font-semibold dark:text-slate-300">{{ product.price }} $</h2>
+                <h3 class="text-slate-600 dark:text-slate-200">{{ product.description }}</h3>
                 
 
                 <div class=" grid grid-cols-3 gap-3 items-center">
                     
-                    <div @click="count > 1 && count--" class="p-2 rounded-full border w-fit hover:bg-orange-400 duration-300 cursor-pointer">
+                    <div @click="count > 1 && count--" class="p-2 rounded-full border border-purple-300 w-fit hover:bg-purple-500 duration-300 cursor-pointer dark:text-slate-200">
                     <i class="fa-solid fa-minus"></i>
                     </div>
                                     
-                    <input v-model="count" type="number" class="outline-none font-bold py-1 text-slate-600 px-2 text-2xl" min="1">
+                    <input v-model="count" type="number" class="outline-none font-bold py-1 text-slate-600 px-2 text-3xl dark:bg-slate-900 dark:text-slate-100" min="1">
                                 
-                    <div @click="count++" class="p-2 rounded-full border w-fit hover:bg-orange-400 duration-300 cursor-pointer">
+                    <div @click="count++" class="p-2 rounded-full border border-purple-300 w-fit hover:bg-purple-500 duration-300 cursor-pointer dark:text-slate-200">
                     <i class="fa-solid fa-plus"></i>
                     </div>
                 
@@ -96,7 +96,7 @@ export default {
         let product = ref('')
         let photo = ref('')
         let count = ref('1')
-        let isSuccessfull = ref(false)
+        let isSuccessful = ref(false)
         let loading = ref(false)
         let isAddingToCart = ref(false)
         let addCartText = ref('Add to Cart')
@@ -133,7 +133,7 @@ export default {
                 })
             
             .then(res => {
-                isSuccessfull.value = true
+                isSuccessful.value = true
                 loading.value = false
                 isAddingToCart.value = false
                 addCartText.value = 'Add to Cart'
@@ -149,7 +149,7 @@ export default {
             getUserData()
         } )
 
-        return {addCartText, loading, isSuccessfull, isAddingToCart, product, photo, count, addCart}
+        return {addCartText, loading, isSuccessful, isAddingToCart, product, photo, count, addCart}
     }
 }
 </script>

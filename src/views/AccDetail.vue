@@ -11,16 +11,16 @@
 
                 <!-- Image -->
                 <div class="size-52 lg:size-60">
-                    <img class="rounded-full border border-gray-200 shadow-md" :src="userData.photo" alt="">
+                    <img class="rounded-full shadow-md" :src="userData.photo" alt="">
                 </div>
 
                 <!-- Detail text -->
                 <div class="space-y-8">
-                    <h1 class="font-medium text-slate-700">Username - {{ userData.name }}</h1>
-                    <h1 class="font-medium text-slate-700">Email - {{ userData.email }}</h1>
-                    <h1 class="font-medium text-slate-700">Phone - {{ userData.phone}}</h1>
-                    <h1 class="font-medium text-slate-700">Gender - {{ userData.gender }}</h1>
-                    <h1 class="font-medium text-slate-700">Address - {{ userData.address }}</h1>
+                    <h1 class="font-medium text-slate-700 dark:text-slate-200">Username - {{ userData.name }}</h1>
+                    <h1 class="font-medium text-slate-700 dark:text-slate-200">Email - {{ userData.email }}</h1>
+                    <h1 class="font-medium text-slate-700 dark:text-slate-200">Phone - {{ userData.phone}}</h1>
+                    <h1 class="font-medium text-slate-700 dark:text-slate-200">Gender - {{ userData.gender }}</h1>
+                    <h1 class="font-medium text-slate-700 dark:text-slate-200">Address - {{ userData.address }}</h1>
                 </div>
 
                 <button @click="GoEdit()" class=" float-end rounded-xl font-semibold bg-green-600 px-4 py-2 text-slate-50 hover:bg-green-700 duration-300">Edit</button>

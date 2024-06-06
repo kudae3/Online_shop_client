@@ -3,13 +3,13 @@
     
         <Navigation></Navigation>
 
-        <div v-if="orderSuccess" class="sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-            <div class="flex flex-col bg-white shadow-sm rounded-xl pointer-events-auto">
-                <div class="flex justify-between items-center py-3 px-4 ">
-                    <h3 class="font-bold text-green-500">
+        <div v-if="orderSuccess" class="sm:max-w-lg sm:w-full mt-20 mx-5 sm:mx-auto">
+            <div class="flex flex-col bg-slate-100 rounded-xl pointer-events-auto dark:bg-green-700">
+                <div class="flex justify-between items-center py-2 px-4 ">
+                    <h3 class="font-bold text-green-500 dark:text-white">
                         Successfully ordered 🎉
                     </h3>
-                    <button @click="isSuccessfull = false" type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-basic-modal">
+                    <button @click="isSuccessful = false" type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-slate-200 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-basic-modal">
                     <span class="sr-only">Close</span>
                     <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M18 6 6 18"></path>
@@ -20,7 +20,7 @@
             </div>
         </div>
         
-        <div class="mx-10 my-10 md:mx-20 lg:mx-32 lg:flex justify-center space-y-5 lg:space-y-0 lg:space-x-7">
+        <div class="mx-10 my-20 md:mx-20 lg:mx-32 lg:flex justify-center space-y-5 lg:space-y-0 lg:space-x-7">
 
             <!-- Cart -->
             <div class="relative overflow-x-auto h-fit sm:rounded-lg">
@@ -31,24 +31,24 @@
 
                 <table v-else-if="carts.length" class="w-full text-sm text-left rtl:text-right text-gray-500 ">
 
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <thead class="text-xs text-gray-700 dark:bg-slate-600 uppercase bg-gray-50 ">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-center">
+                            <th scope="col" class="px-6 py-3 text-center dark:text-slate-200">
                                 Product name
                             </th>
-                            <th scope="col" class="px-6 py-3 text-center">
+                            <th scope="col" class="px-6 py-3 text-center dark:text-slate-200">
                                 Price per item
                             </th>
-                            <th scope="col" class="px-6 py-3 text-center">
+                            <th scope="col" class="px-6 py-3 text-center dark:text-slate-200">
                                 Quantity
                             </th>
-                            <th scope="col" class="px-6 py-3 text-center">
+                            <th scope="col" class="px-6 py-3 text-center dark:text-slate-200">
                                 Total price
                             </th>
-                            <th scope="col" class="px-6 py-3 text-center">
+                            <th scope="col" class="px-6 py-3 text-center dark:text-slate-200">
                                 Date
                             </th>  
-                            <th scope="col" class="px-6 py-3 text-center">
+                            <th scope="col" class="px-6 py-3 text-center dark:text-slate-200">
                                 
                             </th>                            
                         </tr>
@@ -72,23 +72,23 @@
             <!-- Cart Summary -->
             <div v-if="carts.length > 0" class="lg:w-1/3 shadow-lg" >
                 
-                <h2 class="font-semibold text-slate-50 text-lg p-4 bg-slate-400 rounded-t-2xl"> <i class="fa-solid fa-clipboard-list"></i> Cart Summary</h2>
+                <h2 class="font-semibold text-slate-50 text-lg p-4 bg-slate-400 dark:bg-slate-600 rounded-t-2xl"> <i class="fa-solid fa-clipboard-list"></i> Cart Summary</h2>
                 
-                <div class="bg-slate-50 shadow-md p-10 space-y-6 rounded-b-lg">
+                <div class="bg-slate-50 dark:bg-slate-800 shadow-md p-10 space-y-6 rounded-b-lg">
                     
-                    <div class="flex justify-between items center font-medium text-slate-700 text-xl">
+                    <div class="flex justify-between items center font-medium text-slate-700 dark:text-slate-200 text-xl">
                         <p class="text-lg">Subtotal</p>
                         <h3 class="text-lg">$ {{ subtotal }}</h3>
                     </div>
 
-                    <div class="flex justify-between items center font-medium text-slate-700 text-xl">
+                    <div class="flex justify-between items center font-medium text-slate-700 dark:text-slate-200 text-xl">
                         <p class="text-lg">Shipping</p>
                         <h3 class="text-lg">$ 10</h3>
                     </div>
 
                     <hr>
 
-                    <div class="flex justify-between items center font-medium text-slate-700 text-xl">
+                    <div class="flex justify-between items center font-medium text-slate-700 dark:text-slate-200 text-xl">
                         <p class="text-lg">Total</p>
                         <p class="text-lg">$ {{ subtotal + 10 }}</p>
                     </div>
@@ -186,7 +186,6 @@ export default {
             })
             
             .then(res => {
-                console.log(res)
                 loading.value = false,
                 orderText.value = 'Proceed to Checkout',
                 isProceeding.value = false,

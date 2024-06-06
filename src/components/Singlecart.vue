@@ -1,24 +1,24 @@
 <template>
-  <tr class="odd:bg-white even:bg-gray-200">
+  <tr class="dark:bg-slate-800" >
     
     <td class="text-start" >
-      <p class="px-6 py-4 text-slate-600 font-medium whitespace-nowrap">{{ cart.product_name }}</p>
+      <p class="px-6 py-4 text-slate-600 dark:text-slate-200 font-medium whitespace-nowrap">{{ cart.product_name }}</p>
     </td>
     
     <td class="text-center" >
-      <p class="px-6 py-4 text-slate-600 font-medium">$ {{ cart.price }}</p>
+      <p class="px-6 py-4 text-slate-600 dark:text-slate-200 font-medium">$ {{ cart.price }}</p>
     </td>
 
     <td class="text-center">
-      <p class="px-6 py-4 text-slate-600 font-medium" >{{ quantity }}</p>
+      <p class="px-6 py-4 text-slate-600 dark:text-slate-200 font-medium" >{{ quantity }}</p>
     </td>
 
     <td class="text-center">
-      <p class="px-6 py-4 text-slate-600 font-medium" >$ {{ totalPrice }}</p>
+      <p class="px-6 py-4 text-slate-600 dark:text-slate-200 font-medium whitespace-nowrap" >$ {{ totalPrice }}</p>
     </td>
 
     <td class="text-center">
-      <p class="px-6 py-4 font-medium whitespace-nowrap">{{ moment(cart.created_at).format(" DD-MM-YYYY, h:mm a") }}</p>
+      <p class="px-6 py-4 font-medium whitespace-nowrap dark:text-slate-200">{{ moment(cart.created_at).format(" DD-MM-YYYY, h:mm a") }}</p>
     </td>
 
     <td class="px-6 py-4">

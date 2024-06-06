@@ -19,8 +19,8 @@
       </div>
     
     </div>
-    <p class="font-medium text-slate-500 text-sm">{{ product.name }}</p>
-    <p class="font-medium text-sm text-slate-700">$ {{ product.price }}</p>
+    <p class="font-medium text-slate-500 text-sm dark:text-slate-300">{{ product.name }}</p>
+    <p class="font-medium text-sm text-slate-700 dark:text-slate-400">$ {{ product.price }}</p>
   
   </div>
 

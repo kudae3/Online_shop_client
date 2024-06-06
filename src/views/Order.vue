@@ -3,7 +3,7 @@
 
         <Navigation></Navigation>
 
-        <div class="mx-10 my-10 md:mx-20 lg:mx-32">
+        <div class="mx-10 my-20 md:mx-20 lg:mx-32">
             <div class="relative overflow-x-auto h-fit  sm:rounded-lg">
 
                 <div v-if="errMsg" class="flex justify-center items-center">
@@ -12,18 +12,18 @@
                 
                 <table v-else-if="orders.length" class="w-full text-sm text-left rtl:text-right text-gray-500 ">
 
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-slate-600">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 dark:text-slate-200">
                                 Order id
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 dark:text-slate-200">
                                 Order Code
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 dark:text-slate-200">
                                 Total Price
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 dark:text-slate-200">
                                 Status
                             </th>
                         </tr>

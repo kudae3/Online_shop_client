@@ -1,6 +1,6 @@
 <template>
     <!-- Nav bar -->
-    <div class="bg-slate-400 flex justify-between items-center h-14 min-w-full py-2 px-5 md:px-20 lg:px-36 shadow-sm">
+    <div class="bg-slate-400 dark:bg-slate-500 flex justify-between items-center h-14 min-w-full py-2 px-5 md:px-20 lg:px-36 shadow-md fixed top-0 z-30">
         
         <!-- Logo -->
         <div class="flex space-x-7">
@@ -19,8 +19,8 @@
             </div>
             
             <div class=" flex flex-col space-y-8 justify-center items-center text-3xl md:flex-row md:space-y-0 md:space-x-7 md:text-xl">
-                <router-link :to="{name: 'cart'}" class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-cart-shopping"></i></router-link>
-                <router-link :to="{name: 'order'}" class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-truck"></i></router-link>
+                <router-link :to="{name: 'cart'}" class="px-2 py-1 hover:text-lime-900 duration-200 "><i class="fa-solid fa-cart-shopping"></i></router-link>
+                <router-link :to="{name: 'order'}" class="px-2 py-1 hover:text-lime-900 duration-200 "><i class="fa-solid fa-truck"></i></router-link>
             </div>
         
         </div>
@@ -30,10 +30,17 @@
             
             <!-- Switch mood and account-->
             <div class="flex space-x-3 md:text-xl">
-                <button class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-moon"></i></button>
-                <!-- <button class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-lightbulb"></i></button> -->
-                <router-link :to="{name: 'accCenter'}" class="px-2 py-1 hover:text-orange-700 duration-200"><i class="fa-solid fa-user"></i></router-link>
-                <button @click="Logout()" class="px-2 py-1 hover:text-red-700 duration-200 text-red-600"><i class="fa-solid fa-right-from-bracket"></i></button>
+                
+                <button @click="toggleState" class="px-2 py-1 hover:text-lime-900 dark:hover:text-slate-400 duration-300">
+                    <i :class="{ 'fa-solid fa-moon': !isDark, 'fa-solid fa-lightbulb': isDark }"></i>
+                </button>
+                
+                <router-link :to="{name: 'accCenter'}" class="px-2 py-1 hover:text-lime-900 dark:hover:text-slate-400 duration-300">
+                    <i class="fa-solid fa-user"></i>
+                </router-link>
+                
+                <button @click="Logout()" class="px-2 py-1 hover:text-red-900 duration-200 text-red-800"><i class="fa-solid fa-right-from-bracket"></i></button>
+            
             </div>
 
             <!-- Mobile menu -->
@@ -46,13 +53,15 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
     setup () {
         const mobileSlide = ref("-100%");
         let router = useRouter();
+
+        let isDark = ref();
 
         let toggleMobileMenu = () => {
             mobileSlide.value = mobileSlide.value === "0px" ? "-100%" : "0px";
@@ -63,7 +72,33 @@ export default {
             router.push({name: 'login'});
         }
 
-        return { mobileSlide, toggleMobileMenu, Logout };
+        const toggleState = () => {
+            
+            isDark.value = !isDark.value;
+            
+            localStorage.setItem('theme', isDark.value ? 'dark' : 'light'); 
+
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+
+        };
+
+        onMounted(() => {
+            const storedTheme = localStorage.getItem('theme');
+            
+                if (storedTheme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark')
+                    isDark.value = true;
+                } else {
+                    document.documentElement.classList.remove('dark')
+                }
+
+        })
+
+        return { mobileSlide, toggleMobileMenu, Logout, isDark, toggleState };
     }
 }
 </script>

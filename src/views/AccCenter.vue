@@ -7,12 +7,12 @@
         
             <h1 class="text-slate-400 font-bold text-2xl font-comfortaa">Account Center</h1>
 
-            <div class="space-y-5 w-fit sm:w-[400px] rounded-lg p-10 bg-slate-100">
+            <div class="space-y-5 w-fit sm:w-[400px] rounded-lg p-10 bg-slate-100 dark:bg-slate-800">
                 
                 <router-link :to="{name: 'accDetail'}" class="cursor-pointer">
                     <div class="flex items-center space-x-3">
                         <img class="size-12 rounded-full " :src="userData.photo" alt="">   
-                        <p class="font-semibold text-gray-600 hover:text-gray-800">{{ userData.name }}</p>
+                        <p class="font-semibold text-gray-600 hover:text-gray-800 dark:text-slate-100 hover:dark:text-slate-300">{{ userData.name }}</p>
                     </div>
                 </router-link>
 
@@ -20,8 +20,8 @@
 
                 <router-link :to="{name: 'changePass'}" class="cursor-pointer">
                     <div class="flex items-center space-x-1">
-                        <div class="size-12 rounded-full flex justify-center items-center"><i class="fa-solid fa-key fa-lg"></i></div>
-                        <p class="font-semibold text-gray-600 hover:text-gray-800">Change Password</p>
+                        <div class="size-12 rounded-full flex justify-center items-center dark:text-gray-300"><i class="fa-solid fa-key fa-lg"></i></div>
+                        <p class="font-semibold text-gray-600 hover:text-gray-800 dark:text-slate-100 hover:dark:text-slate-300">Change Password</p>
                     </div>
                 </router-link>
 

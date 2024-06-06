@@ -5,6 +5,7 @@ export default {
     "./src/views/*.{vue,js,ts,jsx,tsx}",
     "./src/components/*.vue"
   ],
+  darkMode: 'selector',
   theme: {
     extend: {},
     fontFamily: {

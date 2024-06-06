@@ -5,33 +5,33 @@
 
         <div class="m-10 flex justify-center items-center">
         
-            <div class=" relative sm:w-1/2 lg:w-[400px] bg-slate-100 rounded-lg shadow-md space-y-5 md:space-y-10 py-7">
+            <div class=" relative sm:w-1/2 lg:w-[400px] bg-slate-100 rounded-lg shadow-md space-y-5 md:space-y-10 py-7 my-16 dark:bg-slate-800">
 
                 <div v-if="successMsg" class="absolute top-0 bg-green-500 w-full text-center shadow-lg rounded-t-lg">
-                    <p class="py-1 font-semibold text-white">Successfully changed your password!</p>
+                    <p class="py-1 font-semibold text-white">Successfully changed the password!</p>
                 </div>
                 
-                <h2 class="font-comfortaa font-bold text-2xl md:text-3xl text-center text-slate-500 px-10 py-5" >Change Password</h2>
+                <h2 class="font-comfortaa font-bold text-2xl md:text-3xl text-center text-slate-500 dark:text-slate-300 px-10 py-5" >Change Password</h2>
                 
                 <form  class="space-y-10 px-10 py-5" @submit.prevent="Save()">
                     
                     <div class="space-y-2">
-                        <label class="font-medium text-slate-600 block" for="">Current password</label>
-                        <input v-model="currentPass" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="password" name="" id="" >
+                        <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Current password</label>
+                        <input v-model="currentPass" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
                         <h2 v-if="currentPassError" class="text-xs font-semibold text-red-600 pt-3">Current password field is required!</h2>                        
                         <h2 v-if="wrongPassError" class="text-xs font-semibold text-red-600 pt-3">{{ wrongPassError }}</h2>  
                     </div>
 
                     <div class="space-y-2">
-                        <label class="font-medium text-slate-600 block" for="">New password</label>
-                        <input v-model="newPass" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="password" name="" id="" >
+                        <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">New password</label>
+                        <input v-model="newPass" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
                         <h2 v-if="newPassError" class="text-xs font-semibold text-red-600 pt-3">New password field is required!</h2>                        
                         <h2 v-if="lengthError" class="text-xs font-semibold text-red-600 pt-3">New password must be at least five characters!</h2>                        
                     </div>
 
                     <div class="space-y-2">
-                        <label class="font-medium text-slate-600 block" for="">Confirm new password</label>
-                        <input v-model="confirmPass" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 focus:border-orange-400 w-full"  type="password" name="" id="" >
+                        <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Confirm new password</label>
+                        <input v-model="confirmPass" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
                         <h2 v-if="confirmPassError" class="text-xs font-semibold text-red-600 pt-3">Confirm password field is required!</h2>                        
                         <h2 v-if="sameError" class="text-xs font-semibold text-red-600 pt-3">New password and confirm password must be the same!</h2>                                                
                     </div>
