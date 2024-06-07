@@ -9,6 +9,7 @@ import AccCenter from '../views/AccCenter.vue'
 import AccDetail from '../views/AccDetail.vue'
 import AccEdit from '../views/AccEdit.vue'
 import ChangePass from '../views/ChangePass.vue'
+import Notfound from '../views/Notfound.vue'
 
 const routes = [
     
@@ -156,6 +157,21 @@ const routes = [
         path: '/account/changePassword',
         name: 'changePass',
         component: ChangePass,
+        beforeEnter: (to, from, next) => {
+            let token = localStorage.getItem('userToken') 
+            if(token){
+                next()
+            }
+            else{
+                next({name: 'login'})
+            }
+        }
+    },
+
+    {
+        path: "/:pathMatch(.*)*",
+        name: "404page",
+        component: Notfound,
         beforeEnter: (to, from, next) => {
             let token = localStorage.getItem('userToken') 
             if(token){
