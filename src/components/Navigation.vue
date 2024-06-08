@@ -19,8 +19,8 @@
             </div>
             
             <div class=" flex flex-col space-y-8 justify-center items-center text-3xl md:flex-row md:space-y-0 md:space-x-7 md:text-xl">
-                <router-link :to="{name: 'cart'}" class="px-2 py-1 hover:text-lime-900 duration-200 "><i class="fa-solid fa-cart-shopping"></i></router-link>
-                <router-link :to="{name: 'order'}" class="px-2 py-1 hover:text-lime-900 duration-200 "><i class="fa-solid fa-truck"></i></router-link>
+                <router-link :to="{name: 'cart'}" class="px-2 py-1 hover:text-slate-300 dark:hover:text-slate-400 duration-300"><i class="fa-solid fa-cart-shopping"></i></router-link>
+                <router-link :to="{name: 'order'}" class="px-2 py-1 hover:text-slate-300 dark:hover:text-slate-400 duration-300"><i class="fa-solid fa-truck"></i></router-link>
             </div>
         
         </div>
@@ -31,11 +31,11 @@
             <!-- Switch mood and account-->
             <div class="flex space-x-3 md:text-xl">
                 
-                <button @click="toggleState" class="px-2 py-1 hover:text-lime-900 dark:hover:text-slate-400 duration-300">
+                <button @click="toggleState" class="px-2 py-1 hover:text-slate-300 dark:hover:text-slate-400 duration-300">
                     <i :class="{ 'fa-solid fa-moon': !isDark, 'fa-solid fa-lightbulb': isDark }"></i>
                 </button>
                 
-                <router-link :to="{name: 'accCenter'}" class="px-2 py-1 hover:text-lime-900 dark:hover:text-slate-400 duration-300">
+                <router-link :to="{name: 'accCenter'}" class="px-2 py-1 hover:text-slate-300 dark:hover:text-slate-400 duration-300">
                     <i class="fa-solid fa-user"></i>
                 </router-link>
                 

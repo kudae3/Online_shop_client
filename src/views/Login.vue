@@ -10,12 +10,17 @@
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Email</label>
                     <input v-model="inputData.email" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="email" name="" id="" >
+                    <h2 v-if="emailError" class="text-xs font-semibold text-red-600 pt-3">Email is required!</h2>                    
                 </div>
 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Password</label>
                     <input v-model="inputData.password" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
+                    <h2 v-if="passError" class="text-xs font-semibold text-red-600 pt-3">Password is required!</h2>
+                    <h2 v-if="lengthError" class="text-xs font-semibold text-red-600 pt-3">Password must be at least six characters!</h2>                                                                            
                 </div>
+
+                <h2 v-if="serverError" class="text-xs font-semibold text-red-600 pt-3">{{ serverError }}</h2>
 
                 <button :disabled="isLogging" class="flex justify-center items-center space-x-2 px-3 py-2 text-slate-50 font-semibold bg-orange-400 rounded-md hover:bg-orange-500 duration-700">
                 
@@ -31,8 +36,6 @@
                         </div>
                 
                 </button>
-
-                <p class="text-red-500 text-sm font-semibold">{{ errorMsg }}</p>
 
             </form>
 
@@ -50,17 +53,18 @@
 <script>
 import { reactive, ref } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
 
 export default {
     setup () {
-        
-        let errorMsg = ref('');
-        let router = useRouter();
 
         let loading = ref(false)
         let loginText = ref('Login')
         let isLogging = ref(false)
+
+        let emailError = ref(false)
+        let passError = ref(false)
+        let lengthError = ref(false)
+        let serverError = ref('');
         
         let inputData = reactive({
             email : '',
@@ -69,32 +73,57 @@ export default {
 
         let Login = () => {
 
-            loading.value = true,
-            loginText.value = 'Logging',
-            isLogging.value = true
+            emailError.value = false,
+            passError.value = false,
+            lengthError.value = false 
+            serverError.value = ""         
+
+            emailError.value = !inputData.email ? true : false,
+            passError.value = !inputData.password ? true : false
             
-            axios.post('http://127.0.0.1:8000/api/login', inputData)
+            if(inputData.email && inputData.password){
+
+                if(inputData.password.length < 6){
+                    lengthError.value = true
+                }
+                else{
+
+                    loading.value = true,
+                    loginText.value = 'Logging in',
+                    isLogging.value = true
+
+                    emailError.value = false,
+                    passError.value = false,
+                    lengthError.value = false
+
+                    axios.post('http://127.0.0.1:8000/api/login', inputData)
             
-            .then((result) => {
-               
-                localStorage.setItem('userToken', result.data.token);
+                    .then((result) => {
+                    
+                        localStorage.setItem('userToken', result.data.token);
+                        location.reload();
 
-                router.push({name: 'home'})
+                    }).catch((err) => {
 
-            }).catch((err) => {
+                        console.log(err);
+                        serverError.value = err.response.data.message
+                        
+                        loading.value = false,
+                        loginText.value = 'Login',
+                        isLogging.value = false
+                        
+                        inputData.email = null,
+                        inputData.password = null
 
-                loading.value = false,
-                loginText.value = 'Login',
-                isLogging.value = false
-                
-                errorMsg.value = err.response.data.message
-                inputData.email = null,
-                inputData.password = null
-
-            });
+                    });
+                }
+            
+            }   
+   
         }
 
-        return {inputData, errorMsg, Login, loading, loginText, isLogging}
+        return {inputData, Login, loading, loginText, isLogging, serverError,
+                emailError, passError, lengthError}
     }
 }
 </script>

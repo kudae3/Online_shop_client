@@ -8,34 +8,45 @@
             <form action="" class="space-y-7" @submit.prevent="register()">
                 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Username</label>
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Username <span class="text-red-600 font-bold">*</span> </label>
                     <input v-model="inputData.name" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="text" name="" id="" >
+                    <h2 v-if="nameError" class="text-xs font-semibold text-red-600 pt-3">Username is required!</h2>                    
+                    <h2 v-if="nameLengthError" class="text-xs font-semibold text-red-600 pt-3">Username have to be maximum 15 characters!</h2>                                    
                 </div>
                 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Email</label>
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Email <span class="text-red-600 font-bold">*</span> </label>
                     <input v-model="inputData.email" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="email" name="" id="" >
+                    <h2 v-if="emailError" class="text-xs font-semibold text-red-600 pt-3">Email is required!</h2>                                                                                                
                 </div>
 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Phone</label>
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Phone <span class="text-red-600 font-bold">*</span> </label>
                     <input v-model="inputData.phone" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="phone" name="" id="" >
+                    <h2 v-if="phoneError" class="text-xs font-semibold text-red-600 pt-3">Phone is required!</h2>                                                
+                    <h2 v-if="phoneLengthError" class="text-xs font-semibold text-red-600 pt-3">Phone have to be minumum 10 characters!</h2>                                                               
                 </div>  
 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Address</label>
-                    <input v-model="inputData.address" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="address" name="" id="" >
+                    <input v-model="inputData.address" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="address" name="" id="" >                                 
                 </div>                              
 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Password</label>
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Password <span class="text-red-600 font-bold">*</span> </label>
                     <input v-model="inputData.password" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
+                    <h2 v-if="passError" class="text-xs font-semibold text-red-600 pt-3">Password is required!</h2>                                    
+                    <h2 v-if="passLengthError" class="text-xs font-semibold text-red-600 pt-3">Your password has to be minumum six characters!</h2>                    
                 </div>
 
                 <div class="space-y-3">
-                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Confirm Password</label>
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Confirm Password <span class="text-red-600 font-bold">*</span> </label>
                     <input v-model="inputData.confirmPassword" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
+                    <h2 v-if="confirmPassError" class="text-xs font-semibold text-red-600 pt-3">Confirm Password is required!</h2>                                    
+                    <h2 v-if="samePassError" class="text-xs font-semibold text-red-600 pt-3">Password and confirm password have to be same!</h2>                    
                 </div>
+
+                <h2 v-if="serverError" class="text-xs font-semibold text-red-600 pt-3">{{ serverError }}</h2>
 
                 <button :disabled="isSigningup" class=" flex justify-center items-center space-x-2 px-3 py-2 text-slate-50 font-semibold bg-orange-400 rounded-md hover:bg-orange-500 duration-700">
                 
@@ -51,8 +62,6 @@
                         </div>                
                 
                 </button>
-            
-                <p class="text-red-500 text-sm font-semibold">{{ errorMsg }}</p>
             
             </form>
 
@@ -81,6 +90,19 @@ export default {
         let loading = ref(false)
         let signupText = ref('Sign Up')
         let isSigningup = ref(false)
+
+        let nameError = ref(false)
+        let emailError = ref(false)
+        let phoneError = ref(false)
+        let passError = ref(false)
+        let confirmPassError = ref(false)
+
+        let nameLengthError = ref(false)
+        let passLengthError = ref(false)
+        let phoneLengthError = ref(false)
+        let samePassError = ref(false)
+        let serverError = ref('')
+
         
         let inputData = reactive({
             name: '',
@@ -93,30 +115,68 @@ export default {
 
         let register = () =>{
 
-            loading.value = true
-            signupText.value = 'Signing Up',
-            isSigningup.value = true
-            
-            axios.post('http://127.0.0.1:8000/api/register', inputData)
-            
-            .then(result => {
+            nameError.value = false,
+            emailError.value = false,
+            phoneError.value = false,
+            passError.value = false
+            confirmPassError.value = false
+            nameLengthError.value = false
+            passLengthError.value = false
+            phoneLengthError.value = false
+            samePassError.value = false
 
-                localStorage.setItem('userToken', result.data.token);
-                router.push({name: 'home'})
-            
-            })
-            .catch(err => {
-                
-                errorMsg.value = err.response.data.message 
+            nameError.value = !inputData.name ? true: false
+            emailError.value = !inputData.email ? true: false
+            phoneError.value = !inputData.phone ? true : false
+            passError.value = !inputData.password ? true : false
+            confirmPassError.value = !inputData.confirmPassword ? true : false
 
-                loading.value = false
-                signupText.value = 'Sign Up',
-                isSigningup.value = false
-            
-            });
+            if(inputData.name && inputData.email && inputData.phone && inputData.password && inputData.confirmPassword){
+                if(inputData.name.length > 15){
+                    nameLengthError.value = true
+                }else if(inputData.phone.length < 10){
+                    phoneLengthError.value = true
+                }                
+                else if(inputData.password.length < 6){
+                    passLengthError.value = true
+                }
+                else if(inputData.password !== inputData.confirmPassword){
+                    samePassError.value = true
+                }else{
+
+                    loading.value = true
+                    signupText.value = 'Signing Up',
+                    isSigningup.value = true
+                    
+                    axios.post('http://127.0.0.1:8000/api/register', inputData)
+                    
+                    .then(result => {
+
+                        localStorage.setItem('userToken', result.data.token);
+                        location.reload();
+
+                        loading.value = false
+                        signupText.value = 'Sign Up',
+                        isSigningup.value = false
+                    
+                    })
+                    .catch(err => {
+                        console.log(err); // not for user
+                        serverError.value = err.response.data.message
+                        loading.value = false
+                        signupText.value = 'Sign Up',
+                        isSigningup.value = false
+                    
+                    });
+
+                }
+            }
         }        
 
-        return { errorMsg, inputData ,register, loading, signupText, isSigningup}
+        return { errorMsg, inputData ,register,
+                nameError, emailError, phoneError, passError, confirmPassError,
+                nameLengthError, passLengthError, phoneLengthError, samePassError, serverError,
+                loading, signupText, isSigningup}
     }
 }
 </script>

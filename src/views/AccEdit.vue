@@ -69,6 +69,8 @@
 
                 </div>
 
+                <h2 v-if="serverError" class="text-xs font-semibold text-red-600 pt-3">{{ serverError }}</h2>
+
                 <button :disabled="isSaving" @click="SaveEdit()" class="flex items-center justify-center space-x-2 float-end rounded-xl text-base font-semibold bg-green-600 px-4 py-2 text-slate-50 hover:bg-green-700 duration-300">
                 
                     <div v-if="loading" role="status">
@@ -120,6 +122,7 @@ export default {
         let nameError = ref(false)
         let emailError = ref(false)
         let phoneError = ref(false)
+        let serverError = ref('')
 
         onMounted(()=>{
             getUserData();
@@ -151,6 +154,11 @@ export default {
             loading.value = true
             saveText.value = 'Saving'
             isSaving.value = true
+
+            nameError.value = false
+            emailError.value = false
+            phoneError.value = false
+            serverError.value = false
             
             nameError.value = !updateUserData.name ? true : false;
             emailError.value = !updateUserData.email ? true : false;
@@ -184,6 +192,11 @@ export default {
                 })
                 .catch(err => {
                     console.error(err); 
+                    serverError.value = err.response.data.message
+
+                    loading.value = false
+                    saveText.value = 'Save Changes'
+                    isSaving.value = false
                 });
 
             }
@@ -192,7 +205,7 @@ export default {
 
     
         return {userData, updateUserData, SaveEdit, 
-                dropzoneFile, drop, selectedFile, fileInput, dragOver,
+                dropzoneFile, drop, selectedFile, fileInput, dragOver, serverError,
                 nameError, emailError, phoneError, loading, saveText, isSaving };
 
     }
