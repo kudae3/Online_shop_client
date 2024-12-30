@@ -55,6 +55,7 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import useUser from '../composables/useUser';
 
 export default {
     setup () {
@@ -63,13 +64,24 @@ export default {
 
         let isDark = ref();
 
+        let {userData} = useUser();
+
         let toggleMobileMenu = () => {
             mobileSlide.value = mobileSlide.value === "0px" ? "-100%" : "0px";
         }
 
         let Logout = () => {
             localStorage.removeItem('userToken');
-            router.push({name: 'login'});
+            userData.id = '';
+            userData.name = '';
+            userData.email = '';
+            userData.role = '';
+            userData.phone = '';
+            userData.gender = '';
+            userData.address = '';
+            userData.password = '';
+            userData.photo = '';
+            router.replace({ name: 'login' });
         }
 
         const toggleState = () => {

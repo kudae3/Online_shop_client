@@ -9,13 +9,13 @@
                 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Email</label>
-                    <input v-model="inputData.email" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="email" name="" id="" >
+                    <input v-model="inputData.email" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="email">
                     <h2 v-if="emailError" class="text-xs font-semibold text-red-600 pt-3">Email is required!</h2>                    
                 </div>
 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Password</label>
-                    <input v-model="inputData.password" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
+                    <input v-model="inputData.password" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password">
                     <h2 v-if="passError" class="text-xs font-semibold text-red-600 pt-3">Password is required!</h2>
                     <h2 v-if="lengthError" class="text-xs font-semibold text-red-600 pt-3">Password must be at least six characters!</h2>                                                                            
                 </div>
@@ -53,6 +53,7 @@
 <script>
 import { reactive, ref } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 export default {
     setup () {
@@ -65,6 +66,7 @@ export default {
         let passError = ref(false)
         let lengthError = ref(false)
         let serverError = ref('');
+        let router = useRouter();
         
         let inputData = reactive({
             email : '',
@@ -72,7 +74,7 @@ export default {
         })
 
         let Login = () => {
-
+            
             emailError.value = false,
             passError.value = false,
             lengthError.value = false 
@@ -101,7 +103,7 @@ export default {
                     .then((result) => {
                     
                         localStorage.setItem('userToken', result.data.token);
-                        location.reload();
+                        router.push({name: 'home'})                     
 
                     }).catch((err) => {
 

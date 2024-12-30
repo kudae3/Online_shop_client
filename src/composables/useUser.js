@@ -13,13 +13,11 @@ let userData = reactive({
     photo: ''
 })
 
-let token = localStorage.getItem('userToken');
-
 let getUserData = async() => {
     
     await axios.get('http://127.0.0.1:8000/api/get/user', {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${localStorage.getItem('userToken')}`
         }
     })
     
@@ -36,10 +34,11 @@ let getUserData = async() => {
     })
 
     .catch(err => {
-        console.log(err.response.data.message); // not for user
+        console.log(err.response.data.message);
     })
     
 }
+
 
 let useUser = () => {
     return {userData, getUserData}
