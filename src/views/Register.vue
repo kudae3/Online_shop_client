@@ -13,35 +13,46 @@
                     <h2 v-if="nameError" class="text-xs font-semibold text-red-600 pt-3">Username is required!</h2>                    
                     <h2 v-if="nameLengthError" class="text-xs font-semibold text-red-600 pt-3">Username have to be maximum 15 characters!</h2>                                    
                 </div>
+
+                <!-- Gender -->
+                <div class="space-y-3">
+                    <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Gender</label>
+                    <select v-model="inputData.gender" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full">
+                        <option value="" disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
                 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Email <span class="text-red-600 font-bold">*</span> </label>
-                    <input v-model="inputData.email" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="email" name="" id="" >
+                    <input v-model="inputData.email" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="email" >
                     <h2 v-if="emailError" class="text-xs font-semibold text-red-600 pt-3">Email is required!</h2>                                                                                                
                 </div>
 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Phone <span class="text-red-600 font-bold">*</span> </label>
-                    <input v-model="inputData.phone" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="phone" name="" id="" >
+                    <input v-model="inputData.phone" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="phone" >
                     <h2 v-if="phoneError" class="text-xs font-semibold text-red-600 pt-3">Phone is required!</h2>                                                
                     <h2 v-if="phoneLengthError" class="text-xs font-semibold text-red-600 pt-3">Phone have to be minumum 10 characters!</h2>                                                               
                 </div>  
 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Address</label>
-                    <input v-model="inputData.address" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="address" name="" id="" >                                 
+                    <input v-model="inputData.address" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="address" >                                 
                 </div>                              
 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Password <span class="text-red-600 font-bold">*</span> </label>
-                    <input v-model="inputData.password" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
+                    <input v-model="inputData.password" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" >
                     <h2 v-if="passError" class="text-xs font-semibold text-red-600 pt-3">Password is required!</h2>                                    
                     <h2 v-if="passLengthError" class="text-xs font-semibold text-red-600 pt-3">Your password has to be minumum six characters!</h2>                    
                 </div>
 
                 <div class="space-y-3">
                     <label class="font-medium text-slate-600 dark:text-slate-200 block" for="">Confirm Password <span class="text-red-600 font-bold">*</span> </label>
-                    <input v-model="inputData.confirmPassword" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" name="" id="" >
+                    <input v-model="inputData.confirmPassword" class="duration-300 border-0 border-b-[1px] border-slate-300 bg-transparent outline-none focus:none appearance-none focus:ring-0 font-semibold text-slate-600 dark:text-slate-200 focus:border-green-500 w-full"  type="password" >
                     <h2 v-if="confirmPassError" class="text-xs font-semibold text-red-600 pt-3">Confirm Password is required!</h2>                                    
                     <h2 v-if="samePassError" class="text-xs font-semibold text-red-600 pt-3">Password and confirm password have to be same!</h2>                    
                 </div>
@@ -106,6 +117,7 @@ export default {
         
         let inputData = reactive({
             name: '',
+            gender: '',
             email: '',
             phone: '',
             address: '',
@@ -153,11 +165,7 @@ export default {
                     .then(result => {
 
                         localStorage.setItem('userToken', result.data.token);
-                        location.reload();
-
-                        loading.value = false
-                        signupText.value = 'Sign Up',
-                        isSigningup.value = false
+                        router.push({name: 'home'});
                     
                     })
                     .catch(err => {
