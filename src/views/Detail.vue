@@ -21,35 +21,33 @@
         </div>
 
         <!-- Product detail -->
-        <div v-if="product" class="my-24 mx-10 md:mx-20 lg:mx-40 sm:flex justify-center space-y-5 sm:space-y-0 sm:space-x-5">
+        <div v-if="product" class="my-24 mx-10 space-y-3 md:grid grid-cols-2 gap-10 md:mx-20 md:my-20 md:space-y-0">
             
             <div>
-                <img class="rounded-md shadow-md" :src="photo" alt="">
+                <img class="rounded-md md:max-h-full" :src="photo" alt="">
             </div>
 
             <div class="space-y-7">
                 <h1 class="text-3xl font-semibold text-slate-500 dark:text-slate-200">{{ product.name }}</h1>
                 <h2 class="text-blue-700 text-2xl font-semibold dark:text-slate-300">{{ product.price }} $</h2>
-                <h3 class="text-slate-600 dark:text-slate-200">{{ product.description }}</h3>
-                
+                <h3 class="text-slate-600 dark:text-slate-200">{{ product.description }}</h3>                
 
-                <div class=" grid grid-cols-3 gap-3 items-center">
+                <div class="flex space-x-2">
                     
-                    <div @click="count > 1 && count--" class="p-2 rounded-full border border-purple-300 w-fit hover:bg-purple-500 duration-300 cursor-pointer dark:text-slate-200">
-                    <i class="fa-solid fa-minus"></i>
+                    <div @click="reduceCount()" class="px-3 w-fi cursor-pointer dark:text-slate-200 flex justify-center items-center">
+                    <i class="fa-solid fa-minus fa-xl"></i>
                     </div>
                                     
-                    <input v-model="count" type="number" class="outline-none font-bold py-1 text-slate-600 px-2 text-3xl dark:bg-slate-900 dark:text-slate-100" min="1">
+                    <h3 class="outline-none font-bold py-1 text-slate-600 px-2 text-3xl dark:bg-slate-900 dark:text-slate-100">{{ count }}</h3>
                                 
-                    <div @click="count++" class="p-2 rounded-full border border-purple-300 w-fit hover:bg-purple-500 duration-300 cursor-pointer dark:text-slate-200">
-                    <i class="fa-solid fa-plus"></i>
+                    <div @click="count++" class="px-3 w-fi cursor-pointer dark:text-slate-200 flex justify-center items-center">
+                    <i class="fa-solid fa-plus fa-xl"></i>
                     </div>
                 
                 </div>
 
                 <button :disabled="isAddingToCart"  @click="addCart()" class="bg-green-500 text-slate-50 font-semibold px-3 py-2 rounded-2xl hover:bg-green-700 shadow-lg duration-300 w-full flex items-center justify-center space-x-3">
-                    
-                    
+                                        
                     <div v-if="loading" role="status">
                         <svg aria-hidden="true" class="inline size-6 text-gray-200 animate-spin fill-yellow-400" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -103,6 +101,15 @@ export default {
 
         let {userData, getUserData} = useUser()
 
+        let reduceCount = () =>{
+            if(count.value >  1){
+                count.value--;
+            }
+            else{
+                return;
+            }
+        }
+
         let getProduct = () => {
             
             axios.get('http://127.0.0.1:8000/api/detail/product',{
@@ -149,7 +156,7 @@ export default {
             getUserData()
         } )
 
-        return {addCartText, loading, isSuccessful, isAddingToCart, product, photo, count, addCart}
+        return {addCartText, loading, reduceCount, isSuccessful, isAddingToCart, product, photo, count, addCart}
     }
 }
 </script>

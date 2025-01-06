@@ -1,29 +1,24 @@
 <template>
+  <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
+    <router-link :to="{name: 'detail', params: {id: product.id}}">
+      <img
+        alt=""
+        :src="photo"
+        class="h-56 w-full object-cover transition hover:scale-110 duration-700"
+      />
+    </router-link>
   
-  <div class="flex flex-col justify-center items-center space-y-1">
-    
-    <div class="relative">
-      
+    <div class="bg-white dark:text-slate-200 dark:bg-slate-800 p-4 sm:p-6">
+  
       <router-link :to="{name: 'detail', params: {id: product.id}}">
-          <img
-          class="rounded-md cursor-pointer hover:scale-105 duration-300"
-          :src="photo"
-          alt=""
-        />
+        <h3 class="mt-0.5 text-lg ">{{ product.name }}</h3>
       </router-link>
-      
-      <div class="absolute top-1 left-2">
-        <button class="text-red-400 hover:text-red-900">
-          <i class="fa-regular fa-heart"></i>
-        </button>
-      </div>
-    
-    </div>
-    <p class="font-medium text-slate-500 text-sm dark:text-slate-300">{{ product.name }}</p>
-    <p class="font-medium text-sm text-slate-700 dark:text-slate-400">$ {{ product.price }}</p>
   
-  </div>
-
+      <p class="mt-2 line-clamp-3 text-sm/relaxed">
+        {{ product.price }} $
+      </p>
+    </div>
+  </article>
 </template>
 
 <script>

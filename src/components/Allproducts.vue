@@ -1,7 +1,7 @@
 <template>
   
   <!-- products -->
-  <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
     
     <div v-for="product in products" :key="product.id">
       <SingleProduct :product = "product"></SingleProduct>
@@ -14,7 +14,6 @@
 <script>
 
 import SingleProduct from "./SingleProduct.vue";
-import axios from 'axios'
 export default {
   
   components: {
