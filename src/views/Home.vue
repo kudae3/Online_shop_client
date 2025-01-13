@@ -8,10 +8,8 @@
             <!-- searching and filter-->
             <div class="sm:flex justify-between items-center space-y-7 sm:space-y-0">
             
-                <div>
-                    <form @submit.prevent="Search()">
-                        <input v-model="key" class="font-medium border-gray-400 border-b-[1px] outline-none py-1 px-2 dark:bg-slate-900 dark:text-slate-100" type="text" placeholder="Search">
-                    </form>
+                <div>                    
+                    <input v-model="search" class="font-medium border-gray-400 border-b-[1px] outline-none py-1 px-2 dark:bg-slate-900 dark:text-slate-100" type="text" placeholder="Search">                   
                 </div>
                 
                 <div class="text-slate-600 font-medium flex items-center space-x-3 md:space-x-5">
@@ -44,7 +42,7 @@ import Spinner from '../components/Spinner.vue'
 import Allproducts from '../components/Allproducts.vue'
 import axios from 'axios'
 import Navigation from '../components/Navigation.vue'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 export default {
   
     components: {
@@ -55,8 +53,22 @@ export default {
 
         let products = ref('')
         let categories = ref('')
-        let key = ref('')
+        let search = ref('')
         let errorMsg = ref(false);
+
+        watch(search, () => {
+            axios.get('http://127.0.0.1:8000/api/get/products/?search='+search.value)
+            .then(res => {                
+                if (res.data.products && res.data.products.length > 0) {
+                    products.value = res.data.products; 
+                }else {
+                    errorMsg.value = true;
+                }
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        })
 
         let getProducts = () =>{
             axios.get('http://127.0.0.1:8000/api/get/products')
@@ -102,35 +114,12 @@ export default {
         
         }
 
-        let Search = () =>{
-
-            errorMsg.value = false
-
-            axios.get('http://127.0.0.1:8000/api/search/product',{
-                params: {
-                    search: key.value
-                }
-            })
-            .then(res => {
-                if(res.data.products.length){
-                    products.value = res.data.products
-                }
-                else{
-                    errorMsg.value = true
-                }
-            })
-            .catch(err => {
-                console.error(err); 
-            })
-            
-        }
-
         onMounted(()=>{
             getProducts()
             getCategories()
         })
 
-        return {products, categories,errorMsg, Filter, Search, key}
+        return {products, categories,errorMsg, Filter, search}
         
     }
 }
