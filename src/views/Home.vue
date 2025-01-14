@@ -25,7 +25,10 @@
                 <p class="font-medium text-lg text-red-500">No Product Found !</p>
             </div>
 
-            <Allproducts v-else-if="products.length" :products="products"></Allproducts>
+            <div v-else-if="products.length">
+                <Allproducts :products="products"></Allproducts>
+                <Pagination :links="links" :getURL="getURL"></Pagination>
+            </div>
 
             <div v-else>
                 <Spinner></Spinner>
@@ -38,14 +41,17 @@
 </template>
 
 <script>
+import Pagination from '../components/Pagination.vue'
 import Spinner from '../components/Spinner.vue'
 import Allproducts from '../components/Allproducts.vue'
 import axios from 'axios'
 import Navigation from '../components/Navigation.vue'
 import { onMounted, ref, watch } from 'vue';
+import debounce from 'lodash/debounce';
 export default {
   
     components: {
+    Pagination,
     Spinner,
     Allproducts, Navigation },
     
@@ -55,12 +61,14 @@ export default {
         let categories = ref('')
         let search = ref('')
         let errorMsg = ref(false);
+        let links = ref('');
 
-        watch(search, () => {
+        watch(search, debounce(() => {
             axios.get('http://127.0.0.1:8000/api/get/products/?search='+search.value)
             .then(res => {                
-                if (res.data.products && res.data.products.length > 0) {
-                    products.value = res.data.products; 
+                if (res.data.products.data && res.data.products.data.length > 0) {
+                    errorMsg.value = false;
+                    products.value = res.data.products.data; 
                 }else {
                     errorMsg.value = true;
                 }
@@ -68,17 +76,29 @@ export default {
             .catch(err => {
                 console.error(err); 
             })
-        })
+        }, 300))
 
-        let getProducts = () =>{
-            axios.get('http://127.0.0.1:8000/api/get/products')
+        let getURL = (url) => {
+            axios.get(url)
             .then(res => {
-                products.value = res.data.products
+                links.value = res.data.products.links;
+                products.value = res.data.products.data;
             })
             .catch(err => {
                 console.error(err); 
             })
         }
+
+        let getProducts = () =>{
+            axios.get('http://127.0.0.1:8000/api/get/products')
+            .then(res => {
+                    links.value = res.data.products.links;
+                    products.value = res.data.products.data;
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        };
 
         let getCategories = () =>{
             axios.get('http://127.0.0.1:8000/api/get/categories')
@@ -93,7 +113,6 @@ export default {
         let Filter = (id) => {
 
             errorMsg.value = false
-
             axios.get('http://127.0.0.1:8000/api/filter/category', {
                 params: {
                     id
@@ -116,10 +135,10 @@ export default {
 
         onMounted(()=>{
             getProducts()
-            getCategories()
+            getCategories()            
         })
 
-        return {products, categories,errorMsg, Filter, search}
+        return {products, categories,errorMsg, Filter, search, getURL, links}
         
     }
 }
